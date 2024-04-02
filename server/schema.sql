@@ -2,7 +2,7 @@
 
 CREATE TABLE IF NOT EXISTS terms (
   id SERIAL PRIMARY KEY,
-  term VARCHAR(255) UNIQUE,
+  terms VARCHAR(255) UNIQUE,
   definitions TEXT
 );
 

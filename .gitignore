@@ -1,6 +1,8 @@
 ### node etc ###
 .env
 
+etl.js
+
 # Logs
 logs
 *.log
