@@ -22,10 +22,10 @@ const connection = require('../db/db');
 
 exports.getTermsAndIncorrect = (sort, limit) => new Promise((resolve, reject) => {
   let query = `
-    SELECT terms.terms, ARRAY_AGG(incorrect.definitions) AS incorrect_definitions
+    SELECT terms.terms, terms.definitions, ARRAY_AGG(incorrect.definitions) AS incorrect_definitions
     FROM terms
     LEFT JOIN incorrect ON terms.id = incorrect.term_id
-    GROUP BY terms.terms
+    GROUP BY terms.terms, terms.definitions
     ORDER BY ${sort};
   `;
   let params;
@@ -43,6 +43,7 @@ exports.getTermsAndIncorrect = (sort, limit) => new Promise((resolve, reject) =>
     }
   });
 });
+
 
 exports.getHighscores = () => new Promise((resolve, reject) => {
   const query = `
