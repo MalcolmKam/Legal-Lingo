@@ -25,8 +25,8 @@ exports.getTermsAndIncorrect = (sort, limit) => new Promise((resolve, reject) =>
     SELECT terms.terms, terms.definitions, ARRAY_AGG(incorrect.definitions) AS incorrect_definitions
     FROM terms
     LEFT JOIN incorrect ON terms.id = incorrect.term_id
-    GROUP BY terms.terms, terms.definitions
-    ORDER BY ${sort};
+    GROUP BY terms.terms, terms.definitions, terms.learning
+    ORDER BY ${sort}
   `;
   let params;
   if (limit) {
