@@ -3,7 +3,7 @@ import Question from './question';
 import '../public/questions.css';
 
 function Questions({
-  questions, difficulty, score, highscore, setScore
+  questions, difficulty, score, highscore, setScore, setHighscore
 }) {
   return (
     <div className="container">
@@ -19,6 +19,7 @@ function Questions({
             score={score}
             highscore={highscore}
             setScore={setScore}
+            setHighscore={setHighscore}
           />
         ))}
       </div>

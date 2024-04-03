@@ -150,6 +150,7 @@ function App() {
           difficulty={difficulty}
           score={score}
           highscore={highscore}
+          setHighscore={setHighscore}
           setScore={setScore}
         />
       </div>
