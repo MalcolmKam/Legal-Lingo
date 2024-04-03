@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     if (limit && review) {
-      axios.get(`/law-quiz/legal-terms?sort=${review}&limit=${limit}`)
+      axios.get(`/law-quiz/legal-terms?sort=learning&limit=${limit}`)
         .then((response) => {
           setQuestions(response.data);
         })
@@ -31,7 +31,7 @@ function App() {
         });
     }
     if (!limit && review) {
-      axios.get(`/law-quiz/legal-terms?sort=${review}`)
+      axios.get('/law-quiz/legal-terms?sort=learning')
         .then((response) => {
           setQuestions(response.data);
         })
@@ -77,27 +77,6 @@ function App() {
       setDifficulty('Hard');
     } else {
       setDifficulty('Normal');
-    }
-  };
-
-  const updateScore = (event) => {
-    event.preventDefault();
-    const newScore = score + 1;
-    setScore(newScore);
-    if (newScore > highscore) {
-      axios.put('/law-quiz/highscores', { difficulty, score: newScore })
-        .then(() => axios.get('/law-quiz/highscores'))
-        .then((response) => {
-          if (difficulty === 'Normal') {
-            setHighscore(response.data[0].score);
-          } else {
-            setHighscore(response.data[1].score);
-          }
-          console.log('Highscore updated successfully');
-        })
-        .catch((err) => {
-          console.error('Failed to update highscore ', err);
-        });
     }
   };
 
