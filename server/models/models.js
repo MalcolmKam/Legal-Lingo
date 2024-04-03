@@ -57,7 +57,8 @@ exports.decrementLearning = (termId) => new Promise((resolve, reject) => {
 exports.getHighscores = () => new Promise((resolve, reject) => {
   const query = `
     SELECT *
-    FROM highscores;
+    FROM highscores
+    ORDER BY id;
   `;
   connection.query(query, (err, results) => {
     if (err) {

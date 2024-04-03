@@ -22,7 +22,7 @@ function Question({
     return shuffledArray;
   };
 
-  const updateScore = (event) => {
+  const handleRight = (event) => {
     event.preventDefault();
     const newScore = score + 1;
     setScore(newScore);
@@ -41,13 +41,33 @@ function Question({
           console.error('Failed to update highscore ', err);
         });
     }
+    axios.put('law-quiz/increment-learning', { termId: question.id })
+      .then(() => {
+        console.log('Learning incremented successfully');
+      })
+      .catch((err) => {
+        console.error('Failed to increment learning ', err);
+      });
+  };
+
+  const handleWrong = (event) => {
+    event.preventDefault();
+    if (question.learning > 0) {
+      axios.put('law-quiz/decrement-learning', { termId: question.id })
+        .then(() => {
+          console.log('Learning decremented successfully');
+        })
+        .catch((err) => {
+          console.error('Failed to decrement learning ', err);
+        });
+    }
   };
 
   return (
     <div>
       <h2>{question.terms}</h2>
       {shuffledDefinitions.map((definition, index) => (
-        <button key={index} className="definition-button">{definition}</button>
+        <button key={index} className="definition-button" onClick={handleRight}>{definition}</button>
       ))}
     </div>
   );

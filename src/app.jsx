@@ -59,6 +59,8 @@ function App() {
       .catch((err) => {
         console.error('Failed to fetch highscores ', err);
       });
+
+    setScore(0);
   }, [review, limit, difficulty]);
 
   if (questions.length === 0) {
@@ -112,52 +114,6 @@ function App() {
     const newLimit = event.target.value;
     changeLimit(newLimit);
   };
-
-
-  // .banner {
-  //   background-color: #f2f2f2;
-  //   padding: 10px;
-  //   display: flex;
-  //   justify-content: space-between;
-  //   align-items: center;
-  // }
-
-  // .banner h1 {
-  //   font-size: 24px;
-  //   margin: 0;
-  // }
-
-  // .banner h2 {
-  //   font-size: 18px;
-  //   margin: 0;
-  // }
-
-  // .score-difficulty {
-  //   display: flex;
-  //   align-items: center;
-  // }
-
-  // .score-difficulty h2 {
-  //   margin-right: 10px;
-  // }
-
-  // .button {
-  //   background-color: #4CAF50;
-  //   color: white;
-  //   padding: 10px 20px;
-  //   border: none;
-  //   text-align: center;
-  //   text-decoration: none;
-  //   display: inline-block;
-  //   font-size: 16px;
-  //   margin: 4px 2px;
-  //   cursor: pointer;
-  // }
-
-  // .select {
-  //   padding: 5px;
-  //   font-size: 16px;
-  // }
 
   return (
     <>
