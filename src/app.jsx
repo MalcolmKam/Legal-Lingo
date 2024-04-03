@@ -125,7 +125,7 @@ function App() {
             Change Difficulty
           </button>
           <button className="button" onClick={changeReview}>
-            {review ? 'Review' : 'Standard Mode'}
+            {review ? 'Review Mode' : 'Standard Mode'}
           </button>
           <select className="select" onChange={handleLimitChange}>
             <option value="none">No Limit</option>
@@ -152,6 +152,7 @@ function App() {
           highscore={highscore}
           setHighscore={setHighscore}
           setScore={setScore}
+          limit={limit}
         />
       </div>
     </>

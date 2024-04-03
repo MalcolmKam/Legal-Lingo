@@ -71,6 +71,14 @@ export default Question;
   cursor: pointer;
 }
 
+.correct {
+  background-color: #4CAF50;
+}
+
+.incorrect {
+  background-color: #f44336;
+}
+
 .definition-button:hover {
   background-color: #1f618d;
 }

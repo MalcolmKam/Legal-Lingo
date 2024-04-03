@@ -4,15 +4,20 @@ import axios from 'axios';
 import '../public/question.css';
 
 function Question({
-  question, difficulty, score, highscore, setScore, setHighscore
+  question, difficulty, score, highscore, setScore, setHighscore, limit
 }) {
   const [shuffledDefinitions, setShuffledDefinitions] = useState([]);
+  const [clickedButton, setClickedButton] = useState(null);
 
   useEffect(() => {
     const allDefinitions = [question.definitions, ...question.incorrect_definitions];
     const shuffled = shuffleArray(allDefinitions);
     setShuffledDefinitions(shuffled);
   }, [question]);
+
+  useEffect(() => {
+    setClickedButton(null);
+  }, [difficulty, limit]);
 
   const shuffleArray = (array) => {
     const shuffledArray = [...array];
@@ -22,8 +27,6 @@ function Question({
     }
     return shuffledArray;
   };
-
-  const [clickedButton, setClickedButton] = useState(null);
 
   const handleButtonClick = (event, definition) => {
     event.preventDefault();
@@ -69,25 +72,22 @@ function Question({
   return (
     <div>
       <h2>{question.terms}</h2>
-      {shuffledDefinitions.map((definition, index) => (
-        <button
-          key={index}
-          className={`definition-button ${clickedButton === definition ? (definition === question.definitions ? 'correct' : 'incorrect') : ''}`}
-          onClick={(event) => handleButtonClick(event, definition)}
-          disabled={clickedButton !== null}
-        >
-          {definition}
-        </button>
-      ))}
-    </div>
-  );
-
-  return (
-    <div>
-      <h2>{question.terms}</h2>
-      {shuffledDefinitions.map((definition, index) => (
-        <button key={index} className="definition-button" onClick={handleRight}>{definition}</button>
-      ))}
+      {difficulty === 'Hard' ? (
+        <input type="text" placeholder="Enter your answer" />
+      ) : (
+        shuffledDefinitions.map((definition, index) => (
+          <button
+            key={index}
+            type="button"
+            // eslint-disable-next-line no-nested-ternary
+            className={`definition-button ${clickedButton === definition ? (definition === question.definitions ? 'correct' : 'incorrect') : ''}`}
+            onClick={(event) => handleButtonClick(event, definition)}
+            disabled={clickedButton !== null}
+          >
+            {definition}
+          </button>
+        ))
+      )}
     </div>
   );
 }
