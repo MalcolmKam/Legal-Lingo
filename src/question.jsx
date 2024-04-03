@@ -8,7 +8,6 @@ function Question({
   const [shuffledDefinitions, setShuffledDefinitions] = useState([]);
 
   useEffect(() => {
-    // Shuffle the definitions and incorrect definitions
     const allDefinitions = [question.definitions, ...question.incorrect_definitions];
     const shuffled = shuffleArray(allDefinitions);
     setShuffledDefinitions(shuffled);
@@ -48,7 +47,7 @@ function Question({
     <div>
       <h2>{question.terms}</h2>
       {shuffledDefinitions.map((definition, index) => (
-        <button key={index} className="definition-button">{definition}</button> // Add className for styling
+        <button key={index} className="definition-button">{definition}</button>
       ))}
     </div>
   );

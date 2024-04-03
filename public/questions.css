@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+/* import React, { useEffect, useState } from 'react';
 import Question from './question';
 import '../public/questions.css';
 
@@ -6,11 +6,11 @@ function Questions({
   questions, difficulty, score, highscore, setScore
 }) {
   return (
-    <div className="container">
+    <div className="all-questions">
       <h2>
         Choose the best answer for each term
       </h2>
-      <div className="all-questions">
+      <div className="questions-container">
         {questions.map((question) => (
           <Question
             key={question.id}
@@ -25,4 +25,13 @@ function Questions({
     </div>
   );
 }
-export default Questions;
+export default Questions; */
+
+.all-questions {
+  overflow-y: auto;
+  max-height: 600px;
+  width: 100%;
+  background-color: rgb(209, 208, 208);
+}
+
+
