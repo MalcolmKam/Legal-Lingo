@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Questions from './questions';
 import axios from 'axios';
+import '../public/app.css';
 
 function App() {
   const [questions, setQuestions] = useState([]);
@@ -111,101 +113,89 @@ function App() {
     changeLimit(newLimit);
   };
 
-  return (
-    <>
-      <div>
-        <h1>Legal Lingo</h1>
-      </div>
-      <div>
-        <h2>
-          Difficulty:
-          {' '}
-          {difficulty}
-        </h2>
-      </div>
-      <div>
-        <button onClick={changeDifficulty}>Change Difficulty</button>
-        <button onClick={changeReview}>
-          {review ? 'Review' : 'Standard Mode'}
-        </button>
-        <select onChange={handleLimitChange}>
-          <option value="none">No Limit</option>
-          <option value="5">5 terms</option>
-          <option value="10">10 terms</option>
-          <option value="20">20 terms</option>
-          <option value="30">30 terms</option>
-          <option value="40">40 terms</option>
-          <option value="50">50 terms</option>
-        </select>
-      </div>
-      <div>
-        <h2>
-          Score:
-          {' '}
-          {score}
-        </h2>
-      </div>
-      <div style={{ position: 'absolute', top: 0, right: 0 }}>
-        <h2>
-          High Score:
-          {' '}
-          {highscore}
-        </h2>
-      </div>
-      <div>
-        <h1>{questions[0].id}</h1>
-      </div>
-      <div>
-        <ul>
-          {questions.map((item) => (
-            <li key={item.id}>{item.id}</li>
-          ))}
-        </ul>
-      </div>
-    </>
-  );
+
+  // .banner {
+  //   background-color: #f2f2f2;
+  //   padding: 10px;
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  // }
+
+  // .banner h1 {
+  //   font-size: 24px;
+  //   margin: 0;
+  // }
+
+  // .banner h2 {
+  //   font-size: 18px;
+  //   margin: 0;
+  // }
+
+  // .score-difficulty {
+  //   display: flex;
+  //   align-items: center;
+  // }
+
+  // .score-difficulty h2 {
+  //   margin-right: 10px;
+  // }
+
+  // .button {
+  //   background-color: #4CAF50;
+  //   color: white;
+  //   padding: 10px 20px;
+  //   border: none;
+  //   text-align: center;
+  //   text-decoration: none;
+  //   display: inline-block;
+  //   font-size: 16px;
+  //   margin: 4px 2px;
+  //   cursor: pointer;
+  // }
+
+  // .select {
+  //   padding: 5px;
+  //   font-size: 16px;
+  // }
 
   return (
     <>
-      <div>
-        <h1>Legal Lingo</h1>
+      <div className="banner">
+        <h1 className="title">Legal Lingo</h1>
+        <div className="score-difficulty">
+          <h2>Difficulty: {difficulty}</h2>
+          <button className="button" onClick={changeDifficulty}>
+            Change Difficulty
+          </button>
+          <button className="button" onClick={changeReview}>
+            {review ? 'Review' : 'Standard Mode'}
+          </button>
+          <select className="select" onChange={handleLimitChange}>
+            <option value="none">No Limit</option>
+            <option value="5">5 terms</option>
+            <option value="10">10 terms</option>
+            <option value="20">20 terms</option>
+            <option value="30">30 terms</option>
+            <option value="40">40 terms</option>
+            <option value="50">50 terms</option>
+          </select>
+        </div>
       </div>
-      <div>
+      <div className="banner">
         <h2>
-          Difficulty:
-          {' '}
-          {difficulty}
+          Score out of {questions.length}: {score}
         </h2>
+        <h2>High Score: {highscore}</h2>
       </div>
       <div>
-        <button onClick={changeDifficulty}>Change Difficulty</button>
-        <button onClick={changeReview}>
-          {review ? 'Review' : 'Standard Mode'}
-        </button>
-      </div>
-      <div>
-        <h2>
-          Score:
-          {' '}
-          {score}
-        </h2>
-      </div>
-      <div style={{ position: 'absolute', top: 0, right: 0 }}>
-        <h2>
-          High Score:
-          {' '}
-          {highscore}
-        </h2>
-      </div>
-      <div>
-        <h1>{questions[0].id}</h1>
-      </div>
-      <div>
-        <ul>
-          {questions.map((item) => (
-            <li key={item.id}>{item.id}</li>
-          ))}
-        </ul>
+        <Questions
+          questions={questions}
+          difficulty={difficulty}
+          score={score}
+          highscore={highscore}
+          setScore={setScore}
+        />
       </div>
     </>
   );
