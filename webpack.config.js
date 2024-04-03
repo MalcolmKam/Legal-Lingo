@@ -24,6 +24,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         use: 'babel-loader',
@@ -34,5 +38,5 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'public', 'index.html')
     })
-  ]
-};
+    ],
+  };
