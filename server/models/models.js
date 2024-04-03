@@ -74,7 +74,7 @@ exports.updateHighscore = (difficulty, score) => new Promise((resolve, reject) =
     SET score = $2
     WHERE difficulty = $1;
   `;
-  connection.query(query, [difficulty, score], (err, results) => {
+  connection.query(query, [difficulty.toLowerCase(), score], (err, results) => {
     if (err) {
       reject(err);
     } else {
