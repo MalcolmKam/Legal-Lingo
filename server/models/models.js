@@ -2,10 +2,10 @@ const connection = require('../db/db');
 
 exports.getTermsAndIncorrect = (sort, limit) => new Promise((resolve, reject) => {
   let query = `
-    SELECT terms.terms, terms.definitions, ARRAY_AGG(incorrect.definitions) AS incorrect_definitions
+    SELECT terms.id, terms.terms, terms.definitions, ARRAY_AGG(incorrect.definitions) AS incorrect_definitions, terms.learning
     FROM terms
     LEFT JOIN incorrect ON terms.id = incorrect.term_id
-    GROUP BY terms.terms, terms.definitions, terms.learning
+    GROUP BY terms.id, terms.terms, terms.definitions, terms.learning
     ORDER BY ${sort}
   `;
   let params;
@@ -20,6 +20,36 @@ exports.getTermsAndIncorrect = (sort, limit) => new Promise((resolve, reject) =>
       reject(err);
     } else {
       resolve(results.rows);
+    }
+  });
+});
+
+exports.incrementLearning = (termId) => new Promise((resolve, reject) => {
+  const query = `
+    UPDATE terms
+    SET learning = learning + 1
+    WHERE id = $1;
+  `;
+  connection.query(query, [termId], (err, results) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve(results.rowCount);
+    }
+  });
+});
+
+exports.decrementLearning = (termId) => new Promise((resolve, reject) => {
+  const query = `
+    UPDATE terms
+    SET learning = learning - 1
+    WHERE id = $1;
+  `;
+  connection.query(query, [termId], (err, results) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve(results.rowCount);
     }
   });
 });

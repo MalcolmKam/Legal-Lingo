@@ -8,6 +8,8 @@ const port = process.env.PORT || 3000;
 // Serve static files from the 'dist' directory
 app.use(express.static(path.join(__dirname, '../dist')));
 
+app.use(express.json());
+
 app.use('/law-quiz', router);
 
 // Start the server

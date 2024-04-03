@@ -38,3 +38,27 @@ exports.updateHighscore = (req, res) => {
       console.error('Failed to update highscore ', err);
     });
 };
+
+exports.incrementLearning = (req, res) => {
+  const { termId } = req.body;
+  models.incrementLearning(termId)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      console.error('Failed to increment learning ', err);
+    });
+};
+
+exports.decrementLearning = (req, res) => {
+  const { termId } = req.body;
+  models.decrementLearning(termId)
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      res.sendStatus(500);
+      console.error('Failed to decrement learning ', err);
+    });
+};
