@@ -6,10 +6,16 @@ function Questions({
   questions, difficulty, score, highscore, setScore, setHighscore, limit
 }) {
   return (
-    <div className="container">
-      <h2>
-        Choose the best answer for each term
-      </h2>
+    <div className={difficulty === 'Hard' && 'bad'}>
+      {difficulty === 'Normal' ? (
+        <h2>
+          Choose the best answer
+        </h2>
+      ) : (
+        <h2 className="oh-no">
+          Hope you studied
+        </h2>
+      )}
       <div className="all-questions">
         {questions.map((question) => (
           <Question

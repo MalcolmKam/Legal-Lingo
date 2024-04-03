@@ -8,6 +8,8 @@ function Question({
 }) {
   const [shuffledDefinitions, setShuffledDefinitions] = useState([]);
   const [clickedButton, setClickedButton] = useState(null);
+  const [text, setText] = useState('');
+  const [finalText, setFinalText] = useState('');
 
   useEffect(() => {
     const allDefinitions = [question.definitions, ...question.incorrect_definitions];
@@ -17,6 +19,8 @@ function Question({
 
   useEffect(() => {
     setClickedButton(null);
+    setText('');
+    setFinalText('');
   }, [difficulty, limit]);
 
   const shuffleArray = (array) => {
@@ -69,11 +73,36 @@ function Question({
     }
   };
 
+  const handleTextChange = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleTextSubmit = (event, text) => {
+    handleButtonClick(event, text);
+    setFinalText(text);
+  };
+
   return (
     <div>
       <h2>{question.terms}</h2>
       {difficulty === 'Hard' ? (
-        <input type="text" placeholder="Enter your answer" />
+        <form>
+          <textarea
+            className="definition-input"
+            placeholder="Enter your answer"
+            value={text}
+            onChange={handleTextChange}
+          />
+          <button
+            type="submit"
+            // eslint-disable-next-line no-nested-ternary
+            className={`submit-button ${finalText ? (finalText === question.definitions ? 'right' : 'wrong') : ''}`}
+            onClick={(event) => handleTextSubmit(event, text)}
+            disabled={finalText !== ''}
+          >
+            Submit Answer
+          </button>
+        </form>
       ) : (
         shuffledDefinitions.map((definition, index) => (
           <button

@@ -34,4 +34,14 @@ export default Questions; */
   background-color: rgb(209, 208, 208);
 }
 
+.bad {
+  background-color: #333;
+}
+
+.oh-no {
+  color: red;
+  font-family: 'Creepster', cursive;
+  background-color: #333;
+}
+
 
