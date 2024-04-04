@@ -1,32 +1,3 @@
-/* import React, { useEffect, useState } from 'react';
-import Question from './question';
-import '../public/questions.css';
-
-function Questions({
-  questions, difficulty, score, highscore, setScore
-}) {
-  return (
-    <div className="all-questions">
-      <h2>
-        Choose the best answer for each term
-      </h2>
-      <div className="questions-container">
-        {questions.map((question) => (
-          <Question
-            key={question.id}
-            question={question}
-            difficulty={difficulty}
-            score={score}
-            highscore={highscore}
-            setScore={setScore}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-export default Questions; */
-
 .all-questions {
   overflow-y: auto;
   max-height: 600px;
