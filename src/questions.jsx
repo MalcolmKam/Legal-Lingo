@@ -13,7 +13,7 @@ function Questions({
         </h2>
       ) : (
         <h2 className="oh-no">
-          Hope you studied
+          Type the correct definition
         </h2>
       )}
       <div className="all-questions">
